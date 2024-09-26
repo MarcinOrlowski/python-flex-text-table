@@ -14,6 +14,9 @@ Fast and flexible Python library for text tables.
 
 # Changes
 
+* 2.7.1 (2024-09-26)
+  * Updated code typehints
+
 * 2.7.0 (2023-10-15)
   * Added option to control column's title visibility.
   * Added `set_no_data_label()` to override default `NO DATA` shown when rendering empty table.

@@ -61,6 +61,6 @@ See more usage examples in [project docs](https://github.com/MarcinOrlowski/pyth
 
 ## License
 
-* Written and copyrighted &copy;2023 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
+* Written and copyrighted &copy;2023-2024 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
 * Flex Text Table is open-sourced software licensed under
   the [MIT license](http://opensource.org/licenses/MIT)

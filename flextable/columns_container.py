@@ -72,7 +72,7 @@ class ColumnsContainer(BaseContainer[Column]):
         """
         return self.container.keys()
 
-    def visible_items(self):
+    def visible_items(self) -> Dict[str, Column]:
         """
         Retrieves the visible items in the container.
 

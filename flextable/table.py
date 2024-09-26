@@ -152,7 +152,7 @@ class FlexTable(object):
 
         return self
 
-    def add_columns_from_list(self, columns: List):
+    def add_columns_from_list(self, columns: List) -> None:
         """
         Method: add_columns_from_list
 
@@ -177,6 +177,7 @@ class FlexTable(object):
         for column_key, column_val in columns.items():
             if isinstance(column_key, int):
                 if isinstance(column_val, str):
+                    # do nothing in this case
                     pass
                 elif isinstance(column_val, Column):
                     column_val = column_val.title

@@ -33,7 +33,7 @@ class Column(object):
         self._title: str = title
         self._max_width: int = max_width
 
-        self.align = align
+        self.align: Align = align
         self._cell_align: Align = cell_align if cell_align is not None else Align.AUTO
         self._title_align: Align = title_align if title_align is not None else Align.AUTO
 

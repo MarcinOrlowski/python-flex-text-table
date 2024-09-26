@@ -54,7 +54,7 @@ class TestA(BaseTestCase):
             '╚═══╩═══╩═══╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
         # * ****************************************************************************************** *
 
@@ -75,7 +75,7 @@ class TestA(BaseTestCase):
             '╚════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -107,7 +107,7 @@ class TestA(BaseTestCase):
             '╚═══╩═══╩═══╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     def test_simple_table_via_ctor_list(self) -> None:
         table = FlexTable({
@@ -128,7 +128,7 @@ class TestA(BaseTestCase):
             '╚═══╩═══╩═══╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     def test_simple_table_via_ctor_mixed_type_dataset(self) -> None:
         table = FlexTable({
@@ -154,7 +154,7 @@ class TestA(BaseTestCase):
             '╚═══╩═══╩═══╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -184,7 +184,7 @@ class TestA(BaseTestCase):
 
         rendered_table = self.render_table(table)
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -215,7 +215,7 @@ class TestA(BaseTestCase):
             '╚═══╩═══╩═══╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -237,7 +237,7 @@ class TestA(BaseTestCase):
             '╚════╩══════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -257,7 +257,7 @@ class TestA(BaseTestCase):
             '╚════╩══════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -277,7 +277,7 @@ class TestA(BaseTestCase):
             '╚════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -302,7 +302,7 @@ class TestA(BaseTestCase):
             '╚════╩═══════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -325,7 +325,7 @@ class TestA(BaseTestCase):
             '╚════╩══════════════════════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 
@@ -530,7 +530,7 @@ class TestA(BaseTestCase):
             '╚════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     def test_custom_no_data_label(self):
         table = FlexTable(['ID', Column('SCORE')])
@@ -546,7 +546,7 @@ class TestA(BaseTestCase):
             '╚════╩═══════╝',
         ]
 
-        self.assertEquals(expected, rendered_table)
+        self.assertEqual(expected, rendered_table)
 
     # * ****************************************************************************************** *
 

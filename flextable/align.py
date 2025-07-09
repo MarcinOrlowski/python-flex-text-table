@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -18,13 +22,13 @@ class Align(str, Enum):
     """
 
     # Automated alignment (decided at runtime; default).
-    AUTO: Final[str] = 'auto'
+    AUTO: Final[str] = "auto"
 
     # Content is aligned to left.
-    LEFT: Final[str] = 'left'
+    LEFT: Final[str] = "left"
 
     # Content is aligned to right.
-    RIGHT: Final[str] = 'right'
+    RIGHT: Final[str] = "right"
 
     # Content is centered.
-    CENTER: Final[str] = 'center'
+    CENTER: Final[str] = "center"

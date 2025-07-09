@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -22,9 +26,11 @@ from flextable.separator import Separator
 
 
 class FlexTable(object):
-    def __init__(self,  # noqa: WPS234
-                 header_columns: Optional[Union[Dict, List[Union[str, Column]]]] = None,
-                 rows: Optional[Union[Row, List[Union[Row, List, Dict]]]] = None):
+    def __init__(
+        self,  # noqa: WPS234
+        header_columns: Optional[Union[Dict, List[Union[str, Column]]]] = None,
+        rows: Optional[Union[Row, List[Union[Row, List, Dict]]]] = None,
+    ):
         """
         Initializes a new instance of the FlexTable class with an optional list of header columns.
 
@@ -39,12 +45,15 @@ class FlexTable(object):
         self._columns = None
         self._header = None
         self._rows = None
-        self._no_data_label = 'NO DATA'
+        self._no_data_label = "NO DATA"
 
         self.init(header_columns, rows)
 
-    def init(self, header_columns: Optional[List[str]] = None,  # noqa: WPS234
-             rows: Optional[Union[Row, List[Union[Row, List, Dict]]]] = None):
+    def init(
+        self,
+        header_columns: Optional[List[str]] = None,  # noqa: WPS234
+        rows: Optional[Union[Row, List[Union[Row, List, Dict]]]] = None,
+    ):
         """
         Initializes the FlexTable instance with an optional list of header columns.
 
@@ -105,8 +114,9 @@ class FlexTable(object):
         """
         self._columns = columns
 
-    def add_column(self, column_key: Union[str, int],
-                   column_val: Union[Column, str]) -> 'FlexTable':
+    def add_column(
+        self, column_key: Union[str, int], column_val: Union[Column, str]
+    ) -> "FlexTable":
         """
         Adds a new column to the FlexTable instance.
 
@@ -125,9 +135,12 @@ class FlexTable(object):
 
         return self
 
-    def add_columns(self,  # noqa: WPS234
-                    columns: Optional[Union[
-                        List[Union[str, Column]], Dict[str, Union[str, Column]]]]) -> 'FlexTable':
+    def add_columns(
+        self,  # noqa: WPS234
+        columns: Optional[
+            Union[List[Union[str, Column]], Dict[str, Union[str, Column]]]
+        ],
+    ) -> "FlexTable":
         """
         Adds multiple columns at once. Note columns are registered in the order they are present in
         the source data.
@@ -148,7 +161,7 @@ class FlexTable(object):
         elif isinstance(columns, dict):
             self.add_columns_from_dict(columns)
         else:
-            raise TypeError(f'Unsupported columns data type: {type(columns)}')
+            raise TypeError(f"Unsupported columns data type: {type(columns)}")
 
         return self
 
@@ -182,7 +195,7 @@ class FlexTable(object):
                 elif isinstance(column_val, Column):
                     column_val = column_val.title
                 else:
-                    raise TypeError(f'Unsupported column data type: {type(column_val)}')
+                    raise TypeError(f"Unsupported column data type: {type(column_val)}")
 
             self.add_column(column_key, column_val)
 
@@ -285,10 +298,14 @@ class FlexTable(object):
         # non-numeric keys, # then it is assumed that source elements are to be treated as
         # organized in sequence. They will be automatically assigned to cell at position
         # matching their index in source dataset.
-        int_keys_count = len(list(filter(lambda key: isinstance(key, int), src_row_keys)))
+        int_keys_count = len(
+            list(filter(lambda key: isinstance(key, int), src_row_keys))
+        )
         src_has_num_keys_only = items_to_add_count == int_keys_count
 
-        columns_str_keys_count = len(list(filter(lambda key: isinstance(key, str), column_keys)))
+        columns_str_keys_count = len(
+            list(filter(lambda key: isinstance(key, str), column_keys))
+        )
         columns_have_string_keys_only = columns_str_keys_count == len(column_keys)
 
         if src_has_num_keys_only and columns_have_string_keys_only:
@@ -305,7 +322,7 @@ class FlexTable(object):
 
         return row
 
-    def add_rows(self, rows: List[Union[Row, List, Dict]]) -> 'FlexTable':
+    def add_rows(self, rows: List[Union[Row, List, Dict]]) -> "FlexTable":
         """
         Adds multiple rows in a batch.
         """
@@ -314,7 +331,7 @@ class FlexTable(object):
 
         return self
 
-    def add_separator(self) -> 'FlexTable':
+    def add_separator(self) -> "FlexTable":
         """
         Adds a separator row to the table. The separator row is rendered as a horizontal line
         separating the table header from the table body.
@@ -334,7 +351,9 @@ class FlexTable(object):
         """
         return self.render_as_str(renderer)
 
-    def render_as_str(self, renderer: Optional[RendererContract] = None, end: str = '\n') -> str:
+    def render_as_str(
+        self, renderer: Optional[RendererContract] = None, end: str = "\n"
+    ) -> str:
         """
         Renders the FlexTable as a string, with each row separated by the specified 'end' parameter,
         using the provided renderer or the default FancyRenderer if none is provided.
@@ -364,14 +383,18 @@ class FlexTable(object):
     # * ****************************************************************************************** *
 
     def __contains__(self, column_key: Union[str, int]) -> bool:
+        """Checks if table contains given column key"""
         return column_key in self.columns
 
     def get_column(self, column_key: Union[str, int]) -> Column:
+        """Returns column data referenced by provided key"""
         return self.columns[column_key]
 
     # * ****************************************************************************************** *
 
-    def set_column_align(self, column_key: Union[str, int], align: Align) -> 'FlexTable':
+    def set_column_align(
+        self, column_key: Union[str, int], align: Align
+    ) -> "FlexTable":
         """
         Helper method that sets both cell and title alignment for a specific column.
 
@@ -382,7 +405,7 @@ class FlexTable(object):
         self.set_cell_align(column_key, align)
         return self
 
-    def set_title_align(self, column_key: Union[str, int], align: Align) -> 'FlexTable':
+    def set_title_align(self, column_key: Union[str, int], align: Align) -> "FlexTable":
         """
         Sets title alignment for a specific column.
 
@@ -392,7 +415,7 @@ class FlexTable(object):
         self.columns[column_key].title_align = align
         return self
 
-    def set_cell_align(self, column_key: Union[str, int], align: Align) -> 'FlexTable':
+    def set_cell_align(self, column_key: Union[str, int], align: Align) -> "FlexTable":
         """
         Sets cell alignment for a specific column.
 
@@ -402,7 +425,9 @@ class FlexTable(object):
         self.columns[column_key].align = align
         return self
 
-    def set_column_max_width(self, column_key: Union[str, int], max_width: int) -> 'FlexTable':
+    def set_column_max_width(
+        self, column_key: Union[str, int], max_width: int
+    ) -> "FlexTable":
         """
         Sets the maximum width for a specific column.
 
@@ -412,7 +437,7 @@ class FlexTable(object):
         self.columns[column_key].max_width = max_width
         return self
 
-    def hide_column(self, column_key: Union[str, int, List]) -> 'FlexTable':
+    def hide_column(self, column_key: Union[str, int, List]) -> "FlexTable":
         """
         Hides one or multiple columns in the table. Attempt to hide hidden column is safe.
 
@@ -423,7 +448,7 @@ class FlexTable(object):
             self.set_column_visibility(key, visible=False)
         return self
 
-    def show_column(self, column_key: Union[str, int, List]) -> 'FlexTable':
+    def show_column(self, column_key: Union[str, int, List]) -> "FlexTable":
         """
         Reveals formerly hidden columns in the table. Attempt to show visible column is safe.
 
@@ -434,7 +459,9 @@ class FlexTable(object):
             self.set_column_visibility(key, visible=True)
         return self
 
-    def set_column_visibility(self, column_key: Union[str, int], visible: bool) -> 'FlexTable':
+    def set_column_visibility(
+        self, column_key: Union[str, int], visible: bool
+    ) -> "FlexTable":
         """
         Sets the visibility of a specific column.
 
@@ -452,7 +479,7 @@ class FlexTable(object):
         """
         return self._no_data_label
 
-    def set_no_data_label(self, label: str) -> 'FlexTable':
+    def set_no_data_label(self, label: str) -> "FlexTable":
         """
         Sets the label to be displayed when there are no rows in the table.
         """

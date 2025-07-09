@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -23,6 +27,7 @@ class Row(object):
             self.add_cells(cells)
 
     def __len__(self):
+        """Returns number of elements in container."""
         return len(self.container)
 
     # * ****************************************************************************************** *
@@ -36,20 +41,24 @@ class Row(object):
     @container.setter
     def container(self, value: CellsContainer) -> None:
         if not isinstance(value, CellsContainer):
-            raise TypeError(f'container must be CellsContainer, {type(value)} given.')
+            raise TypeError(f"container must be CellsContainer, {type(value)} given.")
         self._container = value
 
-    def add_cell(self, column_key: Union[str, int], cell: Union[Cell, str, float, int],
-                 align: Align = Align.AUTO) -> 'Row':
+    def add_cell(
+        self,
+        column_key: Union[str, int],
+        cell: Union[Cell, str, float, int],
+        align: Align = Align.AUTO,
+    ) -> "Row":
         if not isinstance(cell, Cell):
             cell = Cell(cell, align)
         self.container.add_cell(column_key, cell)
 
         return self
 
-    def add_cells(self, cells: Dict) -> 'Row':
+    def add_cells(self, cells: Dict) -> "Row":
         if not isinstance(cells, Dict):
-            raise TypeError(f'The cells must be Dict, {type(cells)} given.')
+            raise TypeError(f"The cells must be Dict, {type(cells)} given.")
 
         for column_key, cell in cells.items():
             self.add_cell(column_key, cell)

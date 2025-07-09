@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -19,7 +23,7 @@ class RendererContext(object):
         table (FlexTable): The table being rendered.
     """
 
-    def __init__(self, table: 'FlexTable'):
+    def __init__(self, table: "FlexTable"):
         """
         Constructs a new RendererContext object.
 
@@ -42,7 +46,7 @@ class RendererContext(object):
         """
         return self._table_row_idx
 
-    def inc_table_row_idx(self) -> 'RendererContext':
+    def inc_table_row_idx(self) -> "RendererContext":
         """
         Increments the index of the current row in the table.
 
@@ -64,7 +68,7 @@ class RendererContext(object):
         """
         return self._rendered_row_idx
 
-    def inc_rendered_row_idx(self) -> 'RendererContext':
+    def inc_rendered_row_idx(self) -> "RendererContext":
         """
         Increments the index of the current row being rendered.
 

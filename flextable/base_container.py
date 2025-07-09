@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -11,14 +15,17 @@
 from abc import ABC
 from typing import Dict, TypeVar, Union, Type, Optional, Generic
 
-T = TypeVar('T')  # noqa: WPS111
+T = TypeVar("T")  # noqa: WPS111
 
 
 class BaseContainer(Generic[T], ABC):
-    def __init__(self, items: Optional[Dict[Union[str, int], T]] = None,  # noqa: WPS234
-                 data_type: Type[T] = None) -> None:
+    def __init__(
+        self,
+        items: Optional[Dict[Union[str, int], T]] = None,  # noqa: WPS234
+        data_type: Type[T] = None,
+    ) -> None:
         if data_type is None:
-            raise TypeError('data_type argument must be provided')
+            raise TypeError("data_type argument must be provided")
 
         self._data_type: Type[T] = data_type
         self.container = {}

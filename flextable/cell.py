@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023-2024 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -22,8 +26,11 @@ class Cell(object):
     alignment.
     """
 
-    def __init__(self, value: Optional[Union[str, int, float, bool]] = '',
-                 align: Align = Align.AUTO):
+    def __init__(
+        self,
+        value: Optional[Union[str, int, float, bool]] = "",
+        align: Align = Align.AUTO,
+    ):
         self.value: Optional[Union[str, int, float, bool]] = value
         self.align: Align = align
 
@@ -36,7 +43,7 @@ class Cell(object):
     @value.setter
     def value(self, value: Optional[Union[str, int, float, bool]]) -> None:
         if value is None:
-            value = 'NONE'
+            value = "NONE"
         elif isinstance(value, bool):
             value = str(value).upper()
         else:

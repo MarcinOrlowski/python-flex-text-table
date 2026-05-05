@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -30,7 +34,9 @@ class CellsContainer(BaseContainer[Cell]):
 
     # * ****************************************************************************************** *
 
-    def add_cell(self, column_key: Union[str, int, float], cell: Cell) -> 'CellsContainer':
+    def add_cell(
+        self, column_key: Union[str, int, float], cell: Cell
+    ) -> "CellsContainer":
         if column_key in self._container:
             raise DuplicateColumnKeyError.for_column_key(column_key)
         self._container[column_key] = cell
@@ -38,5 +44,5 @@ class CellsContainer(BaseContainer[Cell]):
 
     def get_cell(self, column_key: Union[str, int, float]) -> Cell:
         if column_key not in self._container:
-            raise ColumnKeyNotFoundError(f'Column key {column_key} not found')
+            raise ColumnKeyNotFoundError(f"Column key {column_key} not found")
         return self._container[column_key]

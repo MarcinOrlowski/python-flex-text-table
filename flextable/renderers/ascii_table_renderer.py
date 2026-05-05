@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -19,12 +23,13 @@ from flextable.exceptions import NoVisibleColumnsError
 from flextable.renderers.context import RendererContext
 from flextable.renderers.contracts import RendererContract
 from flextable.row import Row
+from flextable.width import display_width, pad_to_width, truncate_to_width
 
 
 class AsciiTableRenderer(RendererContract, ABC):
     """Abstract base class for all ASCII table renderers."""
 
-    def render_as_list(self, table: 'FlexTable') -> List:
+    def render_as_list(self, table: "FlexTable") -> List:
         """
         Renders the FlexTable object as a list of strings with separators, header, and data rows.
         If there are no visible columns, it raises a NoVisibleColumnsError. The result variable
@@ -63,11 +68,11 @@ class AsciiTableRenderer(RendererContract, ABC):
 
     # * ****************************************************************************************** *
 
-    ROW_FRAME_LEFT: str = '?'
-    ROW_FRAME_CENTER: str = '?'
-    ROW_FRAME_RIGHT: str = '?'
+    ROW_FRAME_LEFT: str = "?"
+    ROW_FRAME_CENTER: str = "?"
+    ROW_FRAME_RIGHT: str = "?"
 
-    def render_no_data_row(self, ctx: RendererContext, label: str = 'NO DATA') -> str:
+    def render_no_data_row(self, ctx: RendererContext, label: str = "NO DATA") -> str:
         """
         Renders a row of text that indicates that there are no data rows available for rendering.
         The label string "NO DATA" is centered and surrounded by the row frame characters, which
@@ -79,12 +84,11 @@ class AsciiTableRenderer(RendererContract, ABC):
         :return: List of string representation of table without data rows.
         """
         total_table_width = self.get_table_total_width(ctx.table)
-        if len(label) > total_table_width:
-            label = label[:total_table_width - 3] + '…'
-        else:
-            label = label.center(total_table_width)
+        if display_width(label) > total_table_width:
+            label = truncate_to_width(label, total_table_width)
+        label = pad_to_width(label, total_table_width, Align.CENTER)
 
-        return f'{self.ROW_FRAME_LEFT}{label}{self.ROW_FRAME_RIGHT}'
+        return f"{self.ROW_FRAME_LEFT}{label}{self.ROW_FRAME_RIGHT}"
 
     # * ****************************************************************************************** *
 
@@ -100,7 +104,7 @@ class AsciiTableRenderer(RendererContract, ABC):
         :param Row row: Row to render.
         :return: A string representing the row data..
         """
-        result = ''
+        result = ""
 
         columns = ctx.table.columns
         cells = row.container
@@ -124,8 +128,11 @@ class AsciiTableRenderer(RendererContract, ABC):
 
             result += self.pad(columns, column_key, cell.value, align)
 
-            result += self.ROW_FRAME_RIGHT if ctx.is_last_visible_column(
-                column_key) else self.ROW_FRAME_CENTER
+            result += (
+                self.ROW_FRAME_RIGHT
+                if ctx.is_last_visible_column(column_key)
+                else self.ROW_FRAME_CENTER
+            )
 
         return result
 
@@ -143,7 +150,7 @@ class AsciiTableRenderer(RendererContract, ABC):
         """
         columns = ctx.table.columns
 
-        result = ''
+        result = ""
         for column_key, column in columns.items():
             if not column.visible:
                 continue
@@ -151,10 +158,13 @@ class AsciiTableRenderer(RendererContract, ABC):
             if ctx.is_first_visible_column(column_key):
                 result += self.ROW_FRAME_LEFT
 
-            title = column.title if column.title_visible else ''
+            title = column.title if column.title_visible else ""
             result += self.pad(columns, column_key, title, column.title_align)
-            result += self.ROW_FRAME_RIGHT if ctx.is_last_visible_column(
-                column_key) else self.ROW_FRAME_CENTER
+            result += (
+                self.ROW_FRAME_RIGHT
+                if ctx.is_last_visible_column(column_key)
+                else self.ROW_FRAME_CENTER
+            )
 
         ctx.inc_rendered_row_idx()
 
@@ -162,16 +172,16 @@ class AsciiTableRenderer(RendererContract, ABC):
 
     # * ****************************************************************************************** *
 
-    SEGMENT_ROW_FILL: str = '?'
-    SEGMENT_FIRST_ROW_LEFT: str = '?'
-    SEGMENT_FIRST_ROW_CENTER: str = '?'
-    SEGMENT_FIRST_ROW_RIGHT: str = '?'
-    SEGMENT_ROW_LEFT: str = '?'
-    SEGMENT_ROW_CENTER: str = '?'
-    SEGMENT_ROW_RIGHT: str = '?'
-    SEGMENT_LAST_ROW_LEFT: str = '?'
-    SEGMENT_LAST_ROW_CENTER: str = '?'
-    SEGMENT_LAST_ROW_RIGHT: str = '?'
+    SEGMENT_ROW_FILL: str = "?"
+    SEGMENT_FIRST_ROW_LEFT: str = "?"
+    SEGMENT_FIRST_ROW_CENTER: str = "?"
+    SEGMENT_FIRST_ROW_RIGHT: str = "?"
+    SEGMENT_ROW_LEFT: str = "?"
+    SEGMENT_ROW_CENTER: str = "?"
+    SEGMENT_ROW_RIGHT: str = "?"
+    SEGMENT_LAST_ROW_LEFT: str = "?"
+    SEGMENT_LAST_ROW_CENTER: str = "?"
+    SEGMENT_LAST_ROW_RIGHT: str = "?"
 
     def render_bottom_separator(self, ctx: RendererContext) -> str:
         """
@@ -231,7 +241,7 @@ class AsciiTableRenderer(RendererContract, ABC):
         :return: A string representing the separator row.
         """
         columns = ctx.table.columns
-        result = ''
+        result = ""
 
         # check if table is empty (otherwise is_last_visible_row() will return true as row 0 is the
         # last of 0 row dataset, rendering last closing table row characters instead of first
@@ -289,8 +299,13 @@ class AsciiTableRenderer(RendererContract, ABC):
 
     # * ****************************************************************************************** *
 
-    def pad(self, columns: ColumnsContainer, column_key: Union[str, int], value: str,
-            align: Optional[Align] = None) -> str:
+    def pad(
+        self,
+        columns: ColumnsContainer,
+        column_key: Union[str, int],
+        value: str,
+        align: Optional[Align] = None,
+    ) -> str:
         """
         Pads given $value to fit column allowed width. If `$value` exceeded max allowed width, it
         will be truncated to fit. Returns aligned string.
@@ -303,42 +318,28 @@ class AsciiTableRenderer(RendererContract, ABC):
         align = self.get_column_align(columns, column_key) if align is None else align
         max_width = self.get_column_width(columns, column_key)
 
-        str_len = len(value)
-        if str_len > max_width:
-            value = value[:max_width - 1] + '…'
-
-        if align in {Align.LEFT, Align.AUTO}:
-            result = value.ljust(max_width)
-        elif align == Align.RIGHT:
-            result = value.rjust(max_width)
-        elif align == Align.CENTER:
-            # Can't use center() directly, as it seems to lean towards adding more paddings on the
-            # left side of the string, which in case of odd padding characters, makes it look oddly
-            # aligned.
-            # TODO: this should depend on locale to support RTL langs (if anyone misses that now).
-            if max_width - len(value) == 1:
-                value = f'{value} '  # Mind trailing space!
-            result = value.center(max_width)
-        else:
-            raise ValueError(f'Unsupported align: {align}')
-
-        return result
+        return pad_to_width(value, max_width, align)
 
     # * ****************************************************************************************** *
 
-    def get_column_width(self, columns: ColumnsContainer, column_key: Union[str, int]) -> int:
+    def get_column_width(
+        self, columns: ColumnsContainer, column_key: Union[str, int]
+    ) -> int:
         return columns[column_key].max_width
 
-    def get_column_align(self, columns: ColumnsContainer, column_key: Union[str, int]) -> Align:
+    def get_column_align(
+        self, columns: ColumnsContainer, column_key: Union[str, int]
+    ) -> Align:
         return columns[column_key].cell_align
 
-    def get_column_title_align(self, columns: ColumnsContainer,
-                               column_key: Union[str, int]) -> Align:
+    def get_column_title_align(
+        self, columns: ColumnsContainer, column_key: Union[str, int]
+    ) -> Align:
         return columns[column_key].title_align
 
     # * ****************************************************************************************** *
 
-    def get_table_total_width(self, table: 'FlexTable') -> int:
+    def get_table_total_width(self, table: "FlexTable") -> int:
         """
         Calculates the total width of the table, including the visible columns' widths and the width
         of the separator characters between them.
@@ -346,6 +347,8 @@ class AsciiTableRenderer(RendererContract, ABC):
         :param FlexTable table: The table for which the total width will be calculated.
         :return: An integer representing the total width of the table.
         """
-        total_width = sum(column.width for column in table.columns.values() if column.visible)
+        total_width = sum(
+            column.width for column in table.columns.values() if column.visible
+        )
         total_width += (table.visible_column_count - 1) * len(self.SEGMENT_ROW_CENTER)
         return total_width

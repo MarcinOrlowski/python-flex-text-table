@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -23,19 +27,24 @@ class Column(object):
 
     # * ****************************************************************************************** *
 
-    def __init__(self, title: str,
-                 align: Align = Align.AUTO,
-                 max_width: int = 0,
-                 cell_align: Optional[Align] = None,
-                 title_align: Optional[Align] = None,
-                 visible: bool = True,
-                 title_visible: bool = True):
+    def __init__(
+        self,
+        title: str,
+        align: Align = Align.AUTO,
+        max_width: int = 0,
+        cell_align: Optional[Align] = None,
+        title_align: Optional[Align] = None,
+        visible: bool = True,
+        title_visible: bool = True,
+    ):
         self._title: str = title
         self._max_width: int = max_width
 
-        self.align = align
+        self.align: Align = align
         self._cell_align: Align = cell_align if cell_align is not None else Align.AUTO
-        self._title_align: Align = title_align if title_align is not None else Align.AUTO
+        self._title_align: Align = (
+            title_align if title_align is not None else Align.AUTO
+        )
 
         self._visible: bool = visible
         self._title_visible: bool = title_visible
@@ -54,7 +63,9 @@ class Column(object):
 
     @property
     def align(self) -> Align:
-        raise RuntimeError('This is not a real property. Query title or cell align instead.')
+        raise RuntimeError(
+            "This is not a real property. Query title or cell align instead."
+        )
 
     @align.setter
     def align(self, value: Align) -> None:

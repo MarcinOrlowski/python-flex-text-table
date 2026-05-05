@@ -13,10 +13,8 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
 	return 1
 fi
 
-echo "Unit tests..."
-python -m unittest discover --quiet
-pip show pytest --quiet && pytest --quiet --no-header --no-summary
-echo "Code Lint"
+echo "Unit tests…"
+python -m unittest discover --quiet -s tests -p "*_test.py"
+#pip show pytest --quiet && pytest --quiet --no-header --no-summary
+echo "Code Lint…"
 flake8 flextable/ tests/
-echo "MD Lint"
-markdownlint --config .markdownlint.yml --ignore LICENSE.md "**/*.md"

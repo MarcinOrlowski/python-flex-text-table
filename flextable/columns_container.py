@@ -1,9 +1,13 @@
 ####################################################################################################
 #
-# Flex Text Table
+# █▀▀▀ ▀█                ▀▀█▀▀            █       ▀▀█▀▀      █    ▀█
+# █▀▀   █  ▄▀▀▄ █  █       █   ▄▀▀▄ █  █ ▀█▀        █   ▄▀▀▄ █▀▀▄  █  ▄▀▀▄
+# █     █  █▀▀  ▄▀▀▄       █   █▀▀  ▄▀▀▄  █         █    ▄▄█ █  █  █  █▀▀
+# █    ▄█▄ ▀▄▄▀ █  █       █   ▀▄▄▀ █  █  ▀▄▀       █   ▀▄▄▀ █▄▄▀ ▄█▄ ▀▄▄▀
+#
 # Fast and flexible Pyhon library for text tables.
 #
-# Copyright ©2023 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2023-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/python-flex-text-table/
 #
 ####################################################################################################
@@ -13,6 +17,7 @@ from typing import Dict, Union
 from flextable.base_container import BaseContainer
 from flextable.column import Column
 from flextable.exceptions import DuplicateColumnKeyError
+from flextable.width import display_width
 
 
 class ColumnsContainer(BaseContainer[Column]):
@@ -31,11 +36,11 @@ class ColumnsContainer(BaseContainer[Column]):
         if column_key in self:
             raise DuplicateColumnKeyError.for_column_key(column_key)
         if not isinstance(column, Column):
-            raise TypeError(f'column_val must be Column, {type(column)} given.')
+            raise TypeError(f"column_val must be Column, {type(column)} given.")
 
         self._container[column_key] = column
 
-        self._container[column_key].update_max_width(len(column.title))
+        self._container[column_key].update_max_width(display_width(column.title))
 
     # Implement the __getitem__ method to access items using keys
     def __getitem__(self, key: Union[str, int]) -> Column:
@@ -72,7 +77,7 @@ class ColumnsContainer(BaseContainer[Column]):
         """
         return self.container.keys()
 
-    def visible_items(self):
+    def visible_items(self) -> Dict[str, Column]:
         """
         Retrieves the visible items in the container.
 

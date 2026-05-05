@@ -41,6 +41,9 @@ with open("README-pypi.md", "r") as fh:
         version=Const.APP_VERSION,
         packages=find_packages(),
         python_requires=">=3.8",
+        install_requires=[
+            "wcwidth>=0.2.5",
+        ],
         author="Marcin Orlowski",
         author_email="mail@marcinOrlowski.com",
         description=Const.APP_SUMMARY,

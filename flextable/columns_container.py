@@ -17,6 +17,7 @@ from typing import Dict, Union
 from flextable.base_container import BaseContainer
 from flextable.column import Column
 from flextable.exceptions import DuplicateColumnKeyError
+from flextable.width import display_width
 
 
 class ColumnsContainer(BaseContainer[Column]):
@@ -39,7 +40,7 @@ class ColumnsContainer(BaseContainer[Column]):
 
         self._container[column_key] = column
 
-        self._container[column_key].update_max_width(len(column.title))
+        self._container[column_key].update_max_width(display_width(column.title))
 
     # Implement the __getitem__ method to access items using keys
     def __getitem__(self, key: Union[str, int]) -> Column:

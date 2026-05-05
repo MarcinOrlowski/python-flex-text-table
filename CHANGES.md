@@ -14,6 +14,9 @@ Fast and flexible Python library for text tables.
 
 # Changes
 
+* 2.8.0 (TBD)
+  * Fixed cell width for emoji and CJK characters via `wcwidth` (#4).
+
 * 2.7.1 (2024-09-26)
   * Updated code typehints
 

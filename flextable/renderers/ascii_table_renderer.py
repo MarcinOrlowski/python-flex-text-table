@@ -23,6 +23,7 @@ from flextable.exceptions import NoVisibleColumnsError
 from flextable.renderers.context import RendererContext
 from flextable.renderers.contracts import RendererContract
 from flextable.row import Row
+from flextable.width import display_width, pad_to_width, truncate_to_width
 
 
 class AsciiTableRenderer(RendererContract, ABC):
@@ -83,10 +84,9 @@ class AsciiTableRenderer(RendererContract, ABC):
         :return: List of string representation of table without data rows.
         """
         total_table_width = self.get_table_total_width(ctx.table)
-        if len(label) > total_table_width:
-            label = label[: total_table_width - 3] + "…"
-        else:
-            label = label.center(total_table_width)
+        if display_width(label) > total_table_width:
+            label = truncate_to_width(label, total_table_width)
+        label = pad_to_width(label, total_table_width, Align.CENTER)
 
         return f"{self.ROW_FRAME_LEFT}{label}{self.ROW_FRAME_RIGHT}"
 
@@ -318,26 +318,7 @@ class AsciiTableRenderer(RendererContract, ABC):
         align = self.get_column_align(columns, column_key) if align is None else align
         max_width = self.get_column_width(columns, column_key)
 
-        str_len = len(value)
-        if str_len > max_width:
-            value = value[: max_width - 1] + "…"
-
-        if align in {Align.LEFT, Align.AUTO}:
-            result = value.ljust(max_width)
-        elif align == Align.RIGHT:
-            result = value.rjust(max_width)
-        elif align == Align.CENTER:
-            # Can't use center() directly, as it seems to lean towards adding more paddings on the
-            # left side of the string, which in case of odd padding characters, makes it look oddly
-            # aligned.
-            # TODO: this should depend on locale to support RTL langs (if anyone misses that now).
-            if max_width - len(value) == 1:
-                value = f"{value} "  # Mind trailing space!
-            result = value.center(max_width)
-        else:
-            raise ValueError(f"Unsupported align: {align}")
-
-        return result
+        return pad_to_width(value, max_width, align)
 
     # * ****************************************************************************************** *
 

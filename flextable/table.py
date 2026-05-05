@@ -23,6 +23,7 @@ from flextable.renderers.fancy_renderer import FancyRenderer
 from flextable.row import Row
 from flextable.rows_container import RowsContainer
 from flextable.separator import Separator
+from flextable.width import display_width
 
 
 class FlexTable(object):
@@ -256,7 +257,7 @@ class FlexTable(object):
             row.add_cells(src_row)
 
         for column_key, cell in row.items():
-            self.columns[column_key].update_max_width(len(cell.value))
+            self.columns[column_key].update_max_width(display_width(cell.value))
 
         row_id = len(self.rows)
         self.rows[row_id] = row

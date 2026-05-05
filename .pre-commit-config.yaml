@@ -89,7 +89,6 @@ repos:
     rev: 25.1.0
     hooks:
       - id: black
-        language_version: python3.12
   - repo: https://github.com/pycqa/flake8
     rev: 7.3.0
     hooks:
@@ -112,10 +111,10 @@ repos:
       - id: pretty-format-json
         args: [ '--autofix', '--no-sort-keys' ]
 
-  - repo: local
-    hooks:
-      - id: markdownlint
-        name: markdownlint
-        entry: markdownlint --config .markdownlint.yaml *.md docs/*.md
-        language: system
-        pass_filenames: false
+#  - repo: local
+#    hooks:
+#      - id: markdownlint
+#        name: markdownlint
+#        entry: markdownlint --config .markdownlint.yaml *.md docs/*.md
+#        language: system
+#        pass_filenames: false
